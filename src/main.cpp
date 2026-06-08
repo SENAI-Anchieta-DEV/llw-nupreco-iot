@@ -11,9 +11,11 @@ const char* ssid = "WiFiIoT";
 const char* password = "1234abcd";
  
 // MQTT
-const char* mqtt_server = "192.168.43.242";
+const char* mqtt_server = "broker.hivemq.com";
 const int mqtt_port = 1883;
-const char* mqtt_topic = "teste/aula";
+const char* codigo_serial = "LCD-01";
+const char* mqtt_topic_prefix = "nupreco/etiquetas";
+char mqtt_topic[80];
  
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -80,6 +82,8 @@ void setup() {
   lcd.setCursor(0, 1);
   lcd.print(WiFi.localIP().toString());
   delay(2500);
+ 
+  snprintf(mqtt_topic, sizeof(mqtt_topic), "%s/%s", mqtt_topic_prefix, codigo_serial);
  
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(callback);
@@ -149,7 +153,9 @@ void conectarMQTT() {
     lcd.setCursor(0, 1);
     lcd.print("Aguarde...");
  
-    String clientId = "ESP32Client-";
+    String clientId = "Nupreco-";
+    clientId += String(codigo_serial);
+    clientId += "-";
     clientId += String((uint32_t)ESP.getEfuseMac(), HEX);
  
     if (client.connect(clientId.c_str())) {
@@ -160,7 +166,7 @@ void conectarMQTT() {
       lcd.setCursor(0, 0);
       lcd.print("MQTT Conectado");
       lcd.setCursor(0, 1);
-      lcd.print("Topico: ok");
+      lcd.print(codigo_serial);
       delay(1500);
     } else {
       Serial.print("Falha MQTT. Codigo: ");
