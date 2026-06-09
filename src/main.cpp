@@ -14,9 +14,9 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
  
 // Wi-Fi
 
-const char* ssid = "Iphone de Willian";
+const char* ssid = "laryssa mesquita";
 
-const char* password = "will12345";
+const char* password = "28320770";
  
 // MQTT - HiveMQ Cloud
 
@@ -28,7 +28,7 @@ const char* mqtt_user = "nupreco";
 
 const char* mqtt_password = "Admin123456";
  
-const char* codigo_serial = "LCD-01";
+const char* codigo_serial = "LCD-02";
 
 const char* mqtt_topic_prefix = "nupreco/etiquetas";
 
