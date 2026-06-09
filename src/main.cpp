@@ -14,9 +14,9 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
  
 // Wi-Fi
 
-const char* ssid = "WiFiIoT";
+const char* ssid = "Iphone de Willian";
 
-const char* password = "1234abcd";
+const char* password = "will12345";
  
 // MQTT - HiveMQ Cloud
 
